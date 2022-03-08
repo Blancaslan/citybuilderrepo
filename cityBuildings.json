@@ -1,0 +1,204 @@
+{
+  "citybuildings": [
+    {
+      "occupied": true,
+      "type": "house",
+      "tier": 1,
+      "population": 6,
+      "education": 0,
+      "location": "1a"
+    },
+    {
+      "occupied": true,
+      "type": "house",
+      "tier": 1,
+      "population": 6,
+      "education": 0,
+      "location": "1b"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "1c"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "1d"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "1e"
+    },
+    {
+      "occupied": true,
+      "type": "house",
+      "tier": 1,
+      "population": 2,
+      "education": 0,
+      "location": "2a"
+    },
+    {
+      "occupied": true,
+      "type": "house",
+      "tier": 1,
+      "population": 2,
+      "education": 0,
+      "location": "2b"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "2c"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "2d"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "2e"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "3a"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "3b"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "3c"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "3d"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "3e"
+    },
+    {
+      "occupied": true,
+      "type": "office",
+      "tier": 1,
+      "population": 6,
+      "education": 0,
+      "location": "4a"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "4b"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "4c"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "4d"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "4e"
+    },
+    {
+      "occupied": true,
+      "type": "office",
+      "tier": 1,
+      "population": 8,
+      "education": 0,
+      "location": "5a"
+    },
+    {
+      "occupied": true,
+      "type": "office",
+      "tier": 1,
+      "population": 10,
+      "education": 0,
+      "location": "5b"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "5c"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "5d"
+    },
+    {
+      "occupied": false,
+      "type": "#",
+      "tier": 0,
+      "population": 0,
+      "education": 0,
+      "location": "5e"
+    }
+  ]
+}
