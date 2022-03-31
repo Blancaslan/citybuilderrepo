@@ -108,6 +108,8 @@ def createObject():
     counter = 0
     population = random.randint(1, 10)
     type = str(input("enter type: ")).lower()
+    if type == "exit":
+        exit()
     location = str(input("enter location: ")).lower()
     newClass = Building(True, type, 1, population, 0, location)
 
