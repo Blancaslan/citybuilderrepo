@@ -1,48 +1,6 @@
+import os
 import json
 import random
-import time
-import os
-import threading
-
-# stopwatch running on another thread that brings in taxes every 30 seconds
-def stopwatch():
-    timePassed = 0
-    while(True):
-        time.sleep(1)
-        if timePassed == 60:
-            timePassed = 0
-            counter = 0
-            while (counter <= 24):
-                jsonfile = open("CityData.json").read()
-                cityData = json.loads(jsonfile)
-                govCurrency = cityData["cityVal"][0]["governmentcash"]
-                buildfile = open("cityBuildings.json").read()
-                buildingdata = json.loads(buildfile)
-                buildinglist = buildingdata["citybuildings"]
-                housenum = buildinglist[counter]
-                houseoccupied = housenum["occupied"]
-                housetype = housenum["type"]
-                housepopulation = housenum["tier"]
-                housetier = housenum["population"]
-                counter = counter + 1
-                if houseoccupied == True:
-                    if housetype == "house":
-                        tax = govCurrency + 100 * housepopulation * housetier
-                        cityData["cityVal"][0]["governmentcash"] = govCurrency + 100 * housepopulation * housetier
-                        taxes = json.dumps(cityData)
-                        with open("CityData.json", "w") as handler:
-                            handler.write(taxes)
-                    elif housetype == "office":
-                        tax = govCurrency + 200 * housepopulation * housetier
-                        cityData["cityVal"][0]["governmentcash"] = govCurrency + 200 * housepopulation * housetier
-                        taxes = json.dumps(cityData)
-                        with open("CityData.json", "w") as handler:
-                            handler.write(taxes)
-            print(f"\nTaxes were paid\nMoney: {tax}")
-        timePassed = timePassed + 1
-timer = threading.Timer(1.0, stopwatch)
-timer.start()
-
 # Building class that is responsible for creating and editing all the houses in cityBuildings.json
 
 class Building():
@@ -71,10 +29,13 @@ class Building():
 # Function used to create building objects for Buildings class, this also automatically stores them in cityBuildings.json based on location
 
 def createObject():
+    # Clearing everything off screen for new frame
+    os.system("cls")
+
+    # List of buildings for map placement
     buildfile = open("cityBuildings.json").read()
     buildingdata = json.loads(buildfile)
     buildinglist = buildingdata["citybuildings"]
-
     a1 = buildinglist[0]["type"][0]
     b1 = buildinglist[1]["type"][0]
     c1 = buildinglist[2]["type"][0]
@@ -101,16 +62,26 @@ def createObject():
     d5 = buildinglist[23]["type"][0]
     e5 = buildinglist[24]["type"][0]
 
+    cityD = open("../CityData.json").read()
+    cityDL = json.loads(cityD)
+    money = cityDL["cityVal"][0]["governmentcash"]
+    print(f"\r\n  1 2 3 4 5     Money: {money}\na {a1} {a2} {a3} {a4} {a5}\nb {b1} {b2} {b3} {b4} {b5}\nc {c1} {c2} {c3} {c4} {c5}\nd {d1} {d2} {d3} {d4} {d5}\ne {e1} {e2} {e3} {e4} {e5}\n")
 
-    print(f"\n  1 2 3 4 5\na {a1} {a2} {a3} {a4} {a5}\nb {b1} {b2} {b3} {b4} {b5}\nc {c1} {c2} {c3} {c4} {c5}\nd {d1} {d2} {d3} {d4} {d5}\ne {e1} {e2} {e3} {e4} {e5}\n")
 
+    # Gets user input on where the next building should be placed
     found = False
     counter = 0
     population = random.randint(1, 10)
-    type = str(input("enter type: ")).lower()
+    type = str(input("enter building type: ")).lower().strip()
     if type == "exit":
+        with open("cityBuildingsEmpty.json", "r") as handler, open("cityBuildings.json", "w") as to:
+            to.write(handler.read())
         exit()
-    location = str(input("enter location: ")).lower()
+    location = str(input("enter building location: ")).lower().strip()
+    if type == "exit":
+        with open("cityBuildingsEmpty.json", "r") as handler, open("cityBuildings.json", "w") as to:
+            to.write(handler.read())
+        exit()
     newClass = Building(True, type, 1, population, 0, location)
 
     jsonfile = open("cityBuildings.json").read()
@@ -126,10 +97,36 @@ def createObject():
             jsonload["citybuildings"][counter] = jsondump
             writejson = json.dumps(jsonload)
             with open("cityBuildings.json", "w") as handler:
-                handler.write(writejson)
+                handler.write(writejson) 
             found = True
         else:
             counter = counter + 1
+
+    counter = 0
+    while (counter <= 24):
+        jsonfile = open("../CityData.json").read()
+        cityData = json.loads(jsonfile)
+        govCurrency = cityData["cityVal"][0]["governmentcash"]
+        buildfile = open("cityBuildings.json").read()
+        buildingdata = json.loads(buildfile)
+        buildinglist = buildingdata["citybuildings"]
+        housenum = buildinglist[counter]
+        houseoccupied = housenum["occupied"]
+        housetype = housenum["type"]
+        housepopulation = housenum["tier"]
+        housetier = housenum["population"]
+        counter = counter + 1
+        if houseoccupied == True:
+            if housetype == "house":
+                cityData["cityVal"][0]["governmentcash"] = govCurrency + 100 * housetier
+                taxes = json.dumps(cityData)
+                with open("../CityData.json", "w") as handler:
+                    handler.write(taxes)
+            elif housetype == "office":
+                cityData["cityVal"][0]["governmentcash"] = govCurrency + 200 * housetier
+                taxes = json.dumps(cityData)
+                with open("../CityData.json", "w") as handler:
+                    handler.write(taxes)
 
 print(f"This is the city limits, you can decide where you want buildings to go.\n\nInput building LOCATION and building TYPE in the terminal to build a 'house' or 'office'.\n")
 while(True):
