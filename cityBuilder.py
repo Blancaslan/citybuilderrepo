@@ -62,25 +62,41 @@ def createObject():
     d5 = buildinglist[23]["type"][0]
     e5 = buildinglist[24]["type"][0]
 
-    cityD = open("../CityData.json").read()
+
+    cityD = open("./CityData.json").read()
     cityDL = json.loads(cityD)
     money = cityDL["cityVal"][0]["governmentcash"]
-    print(f"\r\n  1 2 3 4 5     Money: {money}\na {a1} {a2} {a3} {a4} {a5}\nb {b1} {b2} {b3} {b4} {b5}\nc {c1} {c2} {c3} {c4} {c5}\nd {d1} {d2} {d3} {d4} {d5}\ne {e1} {e2} {e3} {e4} {e5}\n")
+    population = cityDL["cityVal"][0]["population"]
+
+    popCounter = 0
+    popCount = population
+    while (popCounter <= 24):
+        popCount = popCount + buildinglist[popCounter]["population"]
+        popCounter = popCounter + 1
+    print(f"\r\n  1 2 3 4 5     Money: {money}     Population: {popCount}\na {a1} {a2} {a3} {a4} {a5}\nb {b1} {b2} {b3} {b4} {b5}\nc {c1} {c2} {c3} {c4} {c5}\nd {d1} {d2} {d3} {d4} {d5}\ne {e1} {e2} {e3} {e4} {e5}\n")
 
 
     # Gets user input on where the next building should be placed
     found = False
     counter = 0
-    population = random.randint(1, 10)
+    population = random.randint(1, 6)
     type = str(input("enter building type: ")).lower().strip()
     if type == "exit":
         with open("cityBuildingsEmpty.json", "r") as handler, open("cityBuildings.json", "w") as to:
             to.write(handler.read())
+        cityDL["cityVal"][0]["governmentcash"] = 1000
+        originMoney = json.dumps(cityDL)
+        with open("CityData.json", "w") as handler:
+            handler.write(originMoney)
         exit()
     location = str(input("enter building location: ")).lower().strip()
     if type == "exit":
         with open("cityBuildingsEmpty.json", "r") as handler, open("cityBuildings.json", "w") as to:
             to.write(handler.read())
+        cityDL["cityVal"][0]["governmentcash"] = 1000
+        originMoney = json.dumps(cityDL)
+        with open("CityData.json", "w") as handler:
+            handler.write(originMoney)
         exit()
     newClass = Building(True, type, 1, population, 0, location)
 
@@ -104,7 +120,7 @@ def createObject():
 
     counter = 0
     while (counter <= 24):
-        jsonfile = open("../CityData.json").read()
+        jsonfile = open("./CityData.json").read()
         cityData = json.loads(jsonfile)
         govCurrency = cityData["cityVal"][0]["governmentcash"]
         buildfile = open("cityBuildings.json").read()
@@ -120,12 +136,12 @@ def createObject():
             if housetype == "house":
                 cityData["cityVal"][0]["governmentcash"] = govCurrency + 100 * housetier
                 taxes = json.dumps(cityData)
-                with open("../CityData.json", "w") as handler:
+                with open("./CityData.json", "w") as handler:
                     handler.write(taxes)
             elif housetype == "office":
                 cityData["cityVal"][0]["governmentcash"] = govCurrency + 200 * housetier
                 taxes = json.dumps(cityData)
-                with open("../CityData.json", "w") as handler:
+                with open("./CityData.json", "w") as handler:
                     handler.write(taxes)
 
 print(f"This is the city limits, you can decide where you want buildings to go.\n\nInput building LOCATION and building TYPE in the terminal to build a 'house' or 'office'.\n")
